@@ -9,9 +9,10 @@ on:
 env:
   AWS_REGION: ap-northeast-1
   AWS_EB_APPLICATION_NAME: test-bot
+  AWS_EB_ENVIRONMENT_NAME: test-bot-env
 
 jobs:
-  build-and-push:
+  Deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,3 +53,7 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           eb deploy ${{ env.AWS_EB_ENVIRONMENT_NAME }}
+
+      - name: Check Elastic Beanstalk status
+        run: |
+          eb status ${{ env.AWS_EB_ENVIRONMENT_NAME }}
